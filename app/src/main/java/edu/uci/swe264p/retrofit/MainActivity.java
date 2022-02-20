@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     static final String TAG = MainActivity.class.getSimpleName();
     static final String BASE_URL = "https://api.themoviedb.org/3/";
     static Retrofit retrofit = null;
-    final static String API_KEY = "YOUR_API_KEY";
+    final static String API_KEY = "48ab7dcda2eefdf9055d2a0692a69936";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         }
         MovieApiService movieApiService = retrofit.create(MovieApiService.class);
         Call<Movie> call = movieApiService.getMovie(603, API_KEY);
+        // to avoid exception -> use enqueue
+        // call asynchronously like call back when the result comes back
+        // implicit invocation
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
